@@ -24,7 +24,7 @@ variable "owner" {
 variable "location" {
   type        = string
   default     = ""
-  description = "Optional short region code, e.g. use1 or eus"
+  description = "Optional short region code, e.g. use2 or eus"
 }
 
 variable "extra_tags" {
