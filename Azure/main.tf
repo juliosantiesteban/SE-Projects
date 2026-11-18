@@ -29,3 +29,24 @@ resource "azurerm_resource_group" "main" {
   location = "eastus"
   tags     = module.naming.tags
 }
+
+resource "azurerm_key_vault" "main" {
+  name                       = "kv-${module.naming.prefix}"
+  location                   = azurerm_resource_group.main.location
+  resource_group_name        = azurerm_resource_group.main.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  rbac_authorization_enabled = true
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = false
+  tags                       = module.naming.tags
+}
+
+resource "azurerm_role_assignment" "kv_admin" {
+  scope                = azurerm_key_vault.main.id
+  role_definition_name = "Key Vault Administrator"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+output "key_vault_name" { value = azurerm_key_vault.main.name }
+output "name_prefix"    { value = module.naming.prefix }

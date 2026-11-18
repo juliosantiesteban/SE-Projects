@@ -20,6 +20,7 @@ module "naming" {
   project     = "sepf"
   environment = "dev"
   owner       = "julio"
+  location    = "use1"
 }
 
 
