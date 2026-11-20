@@ -49,4 +49,4 @@ resource "azurerm_role_assignment" "kv_admin" {
 }
 
 output "key_vault_name" { value = azurerm_key_vault.main.name }
-output "name_prefix"    { value = module.naming.prefix }
+output "name_prefix" { value = module.naming.prefix }
