@@ -70,5 +70,5 @@ resource "aws_budgets_budget" "monthly" {
   }
 }
 
-output "ci_role_arn"    { value = aws_iam_role.ci.arn }
-output "secret_name"    { value = aws_secretsmanager_secret.demo.name }
+output "ci_role_arn" { value = aws_iam_role.ci.arn }
+output "secret_name" { value = aws_secretsmanager_secret.demo.name }
