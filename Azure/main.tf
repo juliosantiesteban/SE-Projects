@@ -3,6 +3,13 @@ terraform {
   required_providers {
     azurerm = { source = "hashicorp/azurerm", version = "~> 4.0" }
   }
+  backend "azurerm" {
+    resource_group_name  = "rg-seportfolio"
+    storage_account_name = "seportfolio"
+    container_name       = "tfstate"
+    key                  = "azure/dev.tfstate"
+    use_azuread_auth     = true
+  }
 }
 
 provider "azurerm" {
@@ -50,3 +57,4 @@ resource "azurerm_role_assignment" "kv_admin" {
 
 output "key_vault_name" { value = azurerm_key_vault.main.name }
 output "name_prefix" { value = module.naming.prefix }
+
