@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "ci_trust" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:juliosantiesteban/SE-Projects:*"]
+      values   = ["repo:juliosantiesteban@83293872/SE-Projects@1446364078:pull_request"]
     }
   }
 }
