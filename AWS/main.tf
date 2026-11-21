@@ -27,3 +27,4 @@ module "naming" {
 
 output "name_prefix" { value = module.naming.prefix }
 output "tags" { value = module.naming.tags }
+

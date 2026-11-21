@@ -1,0 +1,42 @@
+name: Terraform Plan (Azure)
+
+on:
+  pull_request:
+    paths:
+      - "Azure/**"
+      - "Shared/**"
+      - ".github/workflows/terraform-plan-azure.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  ARM_SUBSCRIPTION_ID: 5fbd4a0b-a5d3-4ed3-9ae8-b3d93d94c73c
+  ARM_RESOURCE_PROVIDER_REGISTRATIONS: none
+
+jobs:
+  plan:
+    name: terraform plan (Azure)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: 442e0412-8cf4-4257-b685-1d61184b2a2f
+          tenant-id: 704a76cf-97c0-4c0e-9666-ca89b5f04c13
+          subscription-id: 5fbd4a0b-a5d3-4ed3-9ae8-b3d93d94c73c
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        run: terraform init -input=false
+        working-directory: Azure
+
+      - name: Terraform plan
+        run: terraform plan -input=false -lock-timeout=60s
+        working-directory: Azure
