@@ -40,6 +40,8 @@ resource "aws_iam_role_policy_attachment" "ci_readonly" {
 
 # --- Secrets Manager: the secret container only, no real value in code ---
 resource "aws_secretsmanager_secret" "demo" {
+    #checkov:skip=CKV_AWS_149:Demo secret; the default AWS-managed key is fine and a CMK adds cost
+  #checkov:skip=CKV2_AWS_57:Demo secret with no consumer; rotation needs a Lambda and adds cost
   name                    = "${module.naming.prefix}/demo-secret"
   description             = "Placeholder secret for the SE portfolio"
   recovery_window_in_days = 0

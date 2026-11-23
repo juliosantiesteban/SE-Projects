@@ -38,6 +38,11 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_key_vault" "main" {
+    #checkov:skip=CKV_AZURE_42:Purge protection is irreversible and blocks recreating the vault in a learning environment; soft delete is on
+  #checkov:skip=CKV_AZURE_110:Same reason as CKV_AZURE_42
+  #checkov:skip=CKV_AZURE_189:Public access is required so GitHub-hosted runners can reach the vault
+  #checkov:skip=CKV_AZURE_109:No firewall rules, because runner IPs change on every run
+  #checkov:skip=CKV2_AZURE_32:A private endpoint costs money and would block the hosted runners
   name                       = "kv-${module.naming.prefix}"
   location                   = azurerm_resource_group.main.location
   resource_group_name        = azurerm_resource_group.main.name
