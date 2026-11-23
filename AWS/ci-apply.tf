@@ -56,6 +56,7 @@ resource "aws_iam_role" "apply" {
 # Broad on purpose for a personal sandbox. The real protection is the trust
 # policy plus the approval gate. Tighten this later.
 resource "aws_iam_role_policy_attachment" "apply_admin" {
+  #checkov:skip=CKV_AWS_274:Apply role needs broad access while the project is being built; to be scoped down in a later phase
   role       = aws_iam_role.apply.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }

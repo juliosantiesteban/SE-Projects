@@ -1,0 +1,25 @@
+name: Terraform Security Scan
+
+on:
+  pull_request:
+    paths:
+      - "**.tf"
+      - ".github/workflows/terraform-security.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: .
+          framework: terraform
+          quiet: true
+          skip_path: .terraform
