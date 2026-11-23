@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "sa" {
-    #checkov:skip=CKV_AWS_145:Default SSE-S3 encryption is enough here; a KMS CMK adds monthly cost for a learning bucket
+  #checkov:skip=CKV_AWS_145:Default SSE-S3 encryption is enough here; a KMS CMK adds monthly cost for a learning bucket
   #checkov:skip=CKV_AWS_18:Access logging needs a second bucket and adds cost; not needed for a learning bucket
   #checkov:skip=CKV_AWS_144:Cross-region replication doubles storage cost; single region is fine for learning
   #checkov:skip=CKV2_AWS_61:No lifecycle rules needed; the bucket holds only tiny state files
