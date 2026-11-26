@@ -4,3 +4,4 @@
 *.tfvars
 crash.log
 .DS_Store
+Shared/db/local.db
